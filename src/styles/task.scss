@@ -1,0 +1,56 @@
+.task-item {
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .task-item-labels {
+    display: flex;
+    justify-content: flex-start;
+
+    text-align: left;
+
+    h3, p {
+      min-width: 30px;
+      width: 100px;
+      max-width: 150px;
+      padding: 5px;
+      word-wrap: break-word; /* Перенос длинных слов */
+      overflow-wrap: break-word; /* Поддержка переноса длинных слов */
+    }
+  }
+
+  button {
+    margin-left: 10px;
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+
+    &.edit {
+      background-color: #007bff;
+      color: white;
+
+      &:hover {
+        background-color: #0056b3;
+      }
+    }
+
+    &.delete {
+      background-color: #dc3545;
+      color: white;
+
+      &:hover {
+        background-color: #c82333;
+      }
+    }
+  }
+
+  input {
+    padding: 8px;
+    margin-left: 2px;
+    margin-right: 2px;
+  }
+}
