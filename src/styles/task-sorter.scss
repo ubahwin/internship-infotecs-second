@@ -1,0 +1,32 @@
+.task-sorter {
+  display: flex;
+  font-size: 14px;
+
+  padding-top: 10px;
+
+  button {
+    padding: 12px;
+    margin: 0 10px 0 0;
+    cursor: pointer;
+
+    &:first-of-type {
+      background-color: #28a745;
+      color: white;
+      border: none;
+
+      &:hover {
+        background-color: #218838;
+      }
+    }
+
+    &:last-of-type {
+      background-color: #ffc107;
+      color: black;
+      border: none;
+
+      &:hover {
+        background-color: #e0a800;
+      }
+    }
+  }
+}

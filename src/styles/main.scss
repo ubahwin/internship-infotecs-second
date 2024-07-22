@@ -75,3 +75,7 @@ body {
     align-items: center;
   }
 }
+
+.right-container {
+  width: clamp(140px, 200px, 260px);
+}
