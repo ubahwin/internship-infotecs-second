@@ -10,20 +10,30 @@ const TaskForm: React.FC<TaskFormProps> = ({ addTask }) => {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [dueDate, setDueDate] = useState('')
+  const [errors, setErrors] = useState<{ title?: string, dueDate?: string }>({});
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
-    if (title && description && dueDate) {
-      addTask({
-        id: Date.now().toString(),
-        title,
-        description,
-        dueDate
-      })
-      setTitle('')
-      setDescription('')
-      setDueDate('')
+    const newErrors: { title?: string, dueDate?: string } = {}
+    if (!title) newErrors.title = 'Title is required'
+    if (!dueDate) newErrors.dueDate = 'Due date is required'
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors)
+      return
     }
+
+    addTask({
+      id: Date.now().toString(),
+      title,
+      description,
+      dueDate,
+      state: 'in-work'
+    })
+    setTitle('')
+    setDescription('')
+    setDueDate('')
+    setErrors({})
   }
 
   return (
@@ -34,6 +44,7 @@ const TaskForm: React.FC<TaskFormProps> = ({ addTask }) => {
         value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
+      {errors.title && <span className="error">{errors.title}</span>}
       <input
         placeholder="Description"
         value={description}
@@ -44,6 +55,7 @@ const TaskForm: React.FC<TaskFormProps> = ({ addTask }) => {
         value={dueDate}
         onChange={(e) => setDueDate(e.target.value)}
       />
+      {errors.dueDate && <span className="error">{errors.dueDate}</span>}
       <button type="submit">Add Task</button>
     </form>
   )

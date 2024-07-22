@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Task } from '../types/task.ts'
+import {Task, TaskState} from '../types/task.ts'
 import '../styles/task.scss'
 
 interface TaskItemProps {
@@ -13,10 +13,18 @@ const TaskItem: React.FC<TaskItemProps> = ({ task, updateTask, deleteTask }) => 
   const [title, setTitle] = useState(task.title)
   const [description, setDescription] = useState(task.description)
   const [dueDate, setDueDate] = useState(task.dueDate)
+  const [state, setState] = useState<TaskState>(task.state)
 
   const handleUpdate = () => {
-    updateTask({ ...task, title, description, dueDate })
+    updateTask({ ...task, title, description, dueDate, state })
     setIsEditing(false)
+  }
+
+  const handleChangeStatus = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const newState: TaskState = e.target.value as TaskState
+
+    setState(newState)
+    updateTask({ ...task, state: newState })
   }
 
   return (
@@ -47,6 +55,11 @@ const TaskItem: React.FC<TaskItemProps> = ({ task, updateTask, deleteTask }) => 
             <p>{task.dueDate}</p>
           </div>
           <div>
+            <select name="state" id="task-state" value={state} onChange={handleChangeStatus}>
+              <option value="in-work">In work</option>
+              <option value="done">Done</option>
+            </select>
+
             <button onClick={() => setIsEditing(true)}>Edit</button>
             <button onClick={() => deleteTask(task.id)}>Delete</button>
           </div>

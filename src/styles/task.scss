@@ -10,6 +10,7 @@
   .task-item-labels {
     display: flex;
     justify-content: flex-start;
+    align-items: center;
 
     text-align: left;
 
@@ -53,4 +54,34 @@
     margin-left: 2px;
     margin-right: 2px;
   }
+
+  select {
+
+    width: 70px;
+    height: 24px;
+  }
+}
+
+/* Анимации для TaskList */
+.task-cell-enter {
+  opacity: 0;
+}
+.task-cell-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+.task-cell-exit {
+  opacity: 1;
+}
+.task-cell-exit-active {
+  opacity: 0;
+  transition: opacity 500ms ease-in;
+}
+
+/* Ошибки валидации */
+.error {
+  color: red;
+  font-size: 12px;
+  margin-top: -10px;
+  margin-bottom: 10px;
 }

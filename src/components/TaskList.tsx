@@ -2,6 +2,7 @@ import React from 'react'
 import { Task } from '../types/task.ts'
 import TaskItem from './TaskItem'
 import '../styles/task.scss'
+import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
 interface TaskListProps {
   tasks: Task[]
@@ -11,11 +12,13 @@ interface TaskListProps {
 
 const TaskList: React.FC<TaskListProps> = ({ tasks, updateTask, deleteTask }) => {
   return (
-    <div className="task-list">
+    <TransitionGroup className="task-list">
       {tasks.map((task) => (
-        <TaskItem key={task.id} task={task} updateTask={updateTask} deleteTask={deleteTask} />
+        <CSSTransition key={task.id} timeout={500} classNames="task-cell">
+          <TaskItem task={task} updateTask={updateTask} deleteTask={deleteTask} />
+        </CSSTransition>
       ))}
-    </div>
+    </TransitionGroup>
   )
 }
 

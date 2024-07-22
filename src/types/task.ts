@@ -3,5 +3,7 @@ export interface Task {
   title: string
   description: string
   dueDate: string
-  status: "none" | "done" | "in-work"
+  state: TaskState
 }
+
+export type TaskState = 'in-work' | 'done'
